@@ -1,5 +1,5 @@
 const CONFIG = {
-  HEO_HOME_POST_TWO_COLS: true, // 首页博客两列显示，若为false则只显示一列
+  HEO_HOME_POST_TWO_COLS: false, // 首页博客两列显示，若为false则只显示一列
   HEO_LOADING_COVER: true, // 页面加载的遮罩动画
 
   HEO_HOME_BANNER_ENABLE: true,
@@ -8,8 +8,8 @@ const CONFIG = {
 
   // 首页顶部通知条滚动内容，如不需要可以留空 [] 
   HEO_NOTICE_BAR: [
-    { title: '欢迎来到我的博客,更多内容敬请期待。', url: 'https://jiazanw.com' },
-    { title: '欢迎添加我的微信wangzan101，期待与你有更多的交流。', url: 'https://jiazanw.com' }
+    { title: '记录我，遇见你！', url: 'https://wangjiazan.com' },
+    { title: '欢个人微信wangzan101，期待与你有更多的交流。', url: 'https://wangjiazan.com' }
 
 
   ],
@@ -25,7 +25,7 @@ const CONFIG = {
   HEO_HERO_TITLE_3: 'JIAZANW.COM',    
   HEO_HERO_TITLE_4: '记录我，遇见你！',                                  
   HEO_HERO_TITLE_5: '故事从这里开始。',
-  HEO_HERO_TITLE_LINK: 'https://jiazanw.com',    
+  HEO_HERO_TITLE_LINK: 'https://blog.wangjiazan.com/', // 点击英雄区标题跳转链接    
 
   // 英雄区显示三个置顶分类
   HEO_HERO_CATEGORY_1: { title: '必看精选', url: '/tag/必看精选' },
