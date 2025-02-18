@@ -24,9 +24,12 @@ const CONFIG = {
   // 英雄区(首页顶部大卡)
   HEO_HERO_TITLE_1: '分享编程',
   HEO_HERO_TITLE_2: '与思维认知',   
-  HEO_HERO_TITLE_3: 'JIAZANW.COM',    
+  HEO_HERO_TITLE_3: 'JIAZANW.COM',
   HEO_HERO_TITLE_4: '记录我，遇见你！',                                  
   HEO_HERO_TITLE_5: '故事从这里开始。',
+
+  // 英雄区遮罩文字
+  HEO_HERO_COVER_TITLE: '随便逛逛',
   HEO_HERO_TITLE_LINK: 'https://blog.wangjiazan.com/', // 点击英雄区标题跳转链接    
 
   // 英雄区显示三个置顶分类
