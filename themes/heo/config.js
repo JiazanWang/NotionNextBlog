@@ -1,3 +1,5 @@
+import { TURBO_TRACE_DEFAULT_MEMORY_LIMIT } from "next/dist/shared/lib/constants"
+
 const CONFIG = {
   HEO_HOME_POST_TWO_COLS: false, // 首页博客两列显示，若为false则只显示一列
   HEO_LOADING_COVER: true, // 页面加载的遮罩动画
@@ -9,7 +11,7 @@ const CONFIG = {
   // 首页顶部通知条滚动内容，如不需要可以留空 [] 
   HEO_NOTICE_BAR: [
     { title: '记录我，遇见你！', url: 'https://wangjiazan.com' },
-    { title: '欢个人微信wangzan101，期待与你有更多的交流。', url: 'https://wangjiazan.com' }
+    { title: '个人微信wangzan101，期待与你有更多的交流。', url: 'https://wangjiazan.com' }
 
 
   ],
@@ -120,7 +122,7 @@ const CONFIG = {
   HEO_SOCIAL_CARD_TITLE_1: '交流频道',  
   HEO_SOCIAL_CARD_TITLE_2: '加入我们的社群讨论分享',
   HEO_SOCIAL_CARD_TITLE_3: '点击加入社群',
-  HEO_SOCIAL_CARD_URL: 'https://jiazanw.com/',
+  HEO_SOCIAL_CARD_URL: 'https://blog.wangjiazan.com.com/',
 
   // 底部统计面板文案
   HEO_POST_COUNT_TITLE: '文章数:',
