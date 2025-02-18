@@ -28,9 +28,10 @@ const CONFIG = {
   HEO_HERO_TITLE_4: '记录我，遇见你！',                                  
   HEO_HERO_TITLE_5: '故事从这里开始。',
 
+  HEO_HERO_TITLE_LINK: 'https://blog.wangjiazan.com/', // 点击英雄区标题跳转链接 
+  
   // 英雄区遮罩文字
-  HEO_HERO_COVER_TITLE: '随便逛逛',
-  HEO_HERO_TITLE_LINK: 'https://blog.wangjiazan.com/', // 点击英雄区标题跳转链接    
+  HEO_HERO_COVER_TITLE: '随便逛逛',   
 
   // 英雄区显示三个置顶分类
   HEO_HERO_CATEGORY_1: { title: '必看精选', url: '/tag/必看精选' },
