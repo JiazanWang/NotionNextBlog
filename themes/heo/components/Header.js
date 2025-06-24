@@ -40,12 +40,6 @@ const Header = props => {
         setFixedNav(false)
         setBgWhite(false)
         setTextWhite(false)
-
-        // 文章详情页特殊处理
-        if (document?.querySelector('#post-bg')) {
-          setFixedNav(true)
-          setTextWhite(true)
-        }
       } else {
         // 向下滚动后的导航样式
         setFixedNav(true)
@@ -141,9 +135,13 @@ const Header = props => {
       <nav
         id='nav'
         className={`z-20 h-16 top-0 w-full duration-300 transition-all
-            ${fixedNav ? 'fixed' : 'relative bg-transparent'} 
+            ${fixedNav ? 'fixed' : 'relative'} 
             ${textWhite ? 'text-white ' : 'text-black dark:text-white'}  
-            ${navBgWhite ? 'bg-white dark:bg-[#18171d] shadow' : 'bg-transparent'}`}>
+            ${navBgWhite 
+              ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg shadow-gray-200/10 dark:shadow-gray-900/20' 
+              : fixedNav 
+                ? 'bg-white/60 dark:bg-gray-900/60 backdrop-blur-md border-b border-gray-200/30 dark:border-gray-700/30' 
+                : 'bg-transparent'}`}>
         <div className='flex h-full mx-auto justify-between items-center max-w-[86rem] px-6'>
           {/* 左侧logo */}
           <Logo {...props} />
@@ -158,7 +156,7 @@ const Header = props => {
             </div>
             <div
               className={`absolute transition-all duration-700 ${activeIndex === 1 ? 'opacity-100 mb-0' : '-mb-20 opacity-0 invisible'}`}>
-              <h1 className='font-bold text-center text-light-400 dark:text-gray-400'>
+              <h1 className='font-bold text-center text-gray-600 dark:text-gray-400'>
                 {siteConfig('AUTHOR') || siteConfig('TITLE')}{' '}
                 {siteConfig('BIO') && <>|</>} {siteConfig('BIO')}
               </h1>

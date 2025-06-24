@@ -23,7 +23,7 @@ export function InfoCard(props) {
   const url2 = siteConfig('HEO_INFO_CARD_URL2', null, CONFIG)
   const icon2 = siteConfig('HEO_INFO_CARD_ICON2', null, CONFIG)
   return (
-    <Card className='wow fadeInUp bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 text-gray-900 dark:text-white flex flex-col w-80 overflow-hidden relative shadow-xl hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer group'>
+    <Card className='wow fadeInUp bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 text-gray-900 dark:text-white flex flex-col w-80 overflow-hidden relative hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer group'>
       <div className="info-card" style={{ color: '#111827' }}>
         {/* 信息卡牌第一行 */}
         <div className='flex justify-between'>

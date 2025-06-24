@@ -48,11 +48,17 @@ export const MenuListTop = props => {
     <>
       <nav
         id='nav-mobile'
-        className='leading-8 justify-center font-light w-full flex'>
-        {links?.map(
-          (link, index) =>
-            link && link.show && <MenuItemDrop key={index} link={link} />
-        )}
+        className='relative'>
+        {/* 毛玻璃背景容器 */}
+        <div className='absolute inset-0 bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm rounded-2xl border border-white/20 dark:border-gray-700/20 shadow-lg shadow-gray-200/5 dark:shadow-gray-900/10'></div>
+        
+        {/* 菜单内容 */}
+        <div className='relative leading-8 justify-center font-light w-full flex px-2 py-1'>
+          {links?.map(
+            (link, index) =>
+              link && link.show && <MenuItemDrop key={index} link={link} />
+          )}
+        </div>
       </nav>
     </>
   )

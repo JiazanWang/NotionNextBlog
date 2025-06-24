@@ -135,30 +135,34 @@ const LayoutBase = props => {
           // 文章详情页三列布局
           <div
             id='container-inner'
-            className='w-full mx-auto xl:flex justify-center items-start relative z-10 min-h-0 gap-2'>
+            className='w-full mx-auto xl:flex justify-center items-start relative z-10 min-h-screen gap-2'>
             {/* 左侧目录栏 */}
-            <div className='hidden xl:block w-72 flex-shrink-0 h-auto'>
-              {slotLeft}
+            <div className='hidden xl:block w-72 flex-shrink-0 self-stretch'>
+              <div className='sticky top-0 h-screen overflow-hidden'>
+                {slotLeft}
+              </div>
             </div>
 
             {/* 中间内容区域 */}
-            <div className={`flex-1 max-w-4xl h-auto ${className || ''}`}>
+            <div className={`flex-1 max-w-4xl min-h-screen ${className || ''}`}>
               {/* 主区上部嵌入 */}
               {slotTop}
               {children}
             </div>
 
             {/* 右侧信息栏 */}
-            <div className='hidden xl:block w-80 flex-shrink-0 h-auto'>
-              {slotRight}
+            <div className='hidden xl:block w-80 flex-shrink-0 self-stretch'>
+              <div className='sticky top-0 h-screen overflow-hidden'>
+                {slotRight}
+              </div>
             </div>
           </div>
         ) : (
           // 其他页面保持原有两列布局
           <div
             id='container-inner'
-            className={`${shouldUseRightLayout() ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex justify-center items-start relative z-10 min-h-0`}>
-            <div className={`flex-1 max-w-3xl h-auto ${className || ''}`}>
+            className={`${shouldUseRightLayout() ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex justify-center items-start relative z-10 min-h-screen`}>
+            <div className={`flex-1 max-w-3xl min-h-screen ${className || ''}`}>
               {/* 主区上部嵌入 */}
               {slotTop}
               {children}
@@ -166,9 +170,11 @@ const LayoutBase = props => {
 
             <div className='lg:w-2'></div>
 
-            <div className='hidden xl:block w-80 flex-shrink-0 h-auto'>
-              {/* 主区快右侧 */}
-              {slotRight}
+            <div className='hidden xl:block w-80 flex-shrink-0 self-stretch'>
+              <div className='sticky top-0 min-h-screen'>
+                {/* 主区快右侧 */}
+                {slotRight}
+              </div>
             </div>
           </div>
         )}
@@ -194,7 +200,7 @@ const LayoutIndex = props => {
       {/* 统一容器 - 包含分类条、文章列表和分页 */}
       <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl
                       border border-gray-200/50 dark:border-gray-700/50
-                      shadow-2xl rounded-xl
+                      rounded-xl
                       hover:border-indigo-600 dark:hover:border-yellow-600 duration-200
                       overflow-hidden">
         {/* 文章分类条 */}
@@ -226,7 +232,7 @@ const LayoutPostList = props => {
       {/* 统一容器 - 包含分类条、文章列表和分页 */}
       <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl
                       border border-gray-200/50 dark:border-gray-700/50
-                      shadow-2xl rounded-xl
+                      rounded-xl
                       hover:border-indigo-600 dark:hover:border-yellow-600 duration-200
                       overflow-hidden">
         {/* 文章分类条 */}
@@ -302,16 +308,19 @@ const LayoutArchive = props => {
   // 归档页顶部显示条，如果是默认归档则不显示。分类详情页显示分类列表，标签详情页显示当前标签
 
   return (
-    <div className='p-5 rounded-xl border dark:border-gray-600 max-w-6xl w-full bg-white dark:bg-[#1e1e1e]'>
+    <div className='p-8 rounded-2xl border border-white/20 dark:border-gray-700/30 max-w-6xl w-full 
+                    bg-white/70 dark:bg-gray-900/70 backdrop-blur-md
+                    shadow-lg shadow-gray-200/20 dark:shadow-gray-900/40'>
       {/* 文章分类条 */}
       <CategoryBar {...props} border={false} />
 
-      <div className='px-3'>
+      <div className='mt-6'>
         {Object.keys(archivePosts).map(archiveTitle => (
           <BlogPostArchive
             key={archiveTitle}
             posts={archivePosts[archiveTitle]}
             archiveTitle={archiveTitle}
+            siteInfo={props.siteInfo}
           />
         ))}
       </div>
@@ -502,33 +511,88 @@ const LayoutCategoryIndex = props => {
   const { locale } = useGlobal()
 
   return (
-    <div id='category-outer-wrapper' className='mt-8 px-5 md:px-0'>
-      <div className='text-4xl font-extrabold dark:text-gray-200 mb-5'>
-        {locale.COMMON.CATEGORY}
+    <div id='category-outer-wrapper' className='mt-8 px-5 md:px-0 max-w-6xl mx-auto'>
+      {/* 精致的标题区域 */}
+      <div className='mb-12 text-center'>
+        <div className='flex items-center justify-center gap-4 mb-4'>
+          <div className='w-1 h-12 bg-gradient-to-b from-blue-500 to-purple-500 dark:from-yellow-400 dark:to-orange-400 rounded-full'></div>
+          <h1 className='text-4xl font-bold text-gray-800 dark:text-gray-200'>
+            {locale.COMMON.CATEGORY}
+          </h1>
+          <div className='w-1 h-12 bg-gradient-to-b from-purple-500 to-blue-500 dark:from-orange-400 dark:to-yellow-400 rounded-full'></div>
+        </div>
+        <p className='text-gray-600 dark:text-gray-400 text-lg'>
+          探索不同主题的精彩内容
+        </p>
       </div>
+
+      {/* 分类卡片网格 */}
       <div
         id='category-list'
-        className='duration-200 flex flex-wrap m-10 justify-center'>
+        className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
         {categoryOptions?.map(category => {
           return (
             <Link
               key={category.name}
               href={`/category/${category.name}`}
-              passHref
-              legacyBehavior>
-              <div
-                className={
-                  'group mr-5 mb-5 flex flex-nowrap items-center border bg-white text-2xl rounded-xl dark:hover:text-white px-4 cursor-pointer py-3 hover:text-white hover:bg-indigo-600 transition-all hover:scale-110 duration-150'
-                }>
-                <HashTag className={'w-5 h-5 stroke-gray-500 stroke-2'} />
-                {category.name}
-                <div className='bg-[#f1f3f8] ml-1 px-2 rounded-lg group-hover:text-indigo-600 '>
-                  {category.count}
+              className='block group'>
+              <div className='relative overflow-hidden rounded-2xl 
+                            bg-white/70 dark:bg-gray-900/70 
+                            backdrop-blur-md border border-white/20 dark:border-gray-700/30
+                            shadow-lg shadow-gray-200/20 dark:shadow-gray-900/40
+                            hover:shadow-2xl hover:shadow-gray-200/30 dark:hover:shadow-gray-900/60
+                            hover:scale-[1.02] hover:-translate-y-1
+                            transition-all duration-500 ease-out
+                            cursor-pointer p-6'>
+                
+                {/* 背景装饰渐变 */}
+                <div className='absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 dark:from-yellow-400/5 dark:to-orange-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>
+                
+                {/* 内容区域 */}
+                <div className='relative z-10'>
+                  {/* 图标区域 */}
+                  <div className='flex items-center justify-center w-16 h-16 mb-4 mx-auto
+                                bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-yellow-400/10 dark:to-orange-400/10
+                                rounded-2xl group-hover:scale-110 transition-transform duration-300'>
+                    <HashTag className='w-8 h-8 text-blue-600 dark:text-yellow-400 
+                                      group-hover:text-blue-700 dark:group-hover:text-yellow-300
+                                      transition-colors duration-300' />
+                  </div>
+                  
+                  {/* 分类名称 */}
+                  <h3 className='text-xl font-bold text-center mb-3
+                               text-gray-800 dark:text-gray-200
+                               group-hover:text-blue-600 dark:group-hover:text-yellow-400
+                               transition-colors duration-300'>
+                    {category.name}
+                  </h3>
+                  
+                  {/* 文章数量 */}
+                  <div className='flex items-center justify-center'>
+                    <span className='inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+                                   bg-gray-100/80 dark:bg-gray-800/80 text-gray-600 dark:text-gray-400
+                                   group-hover:bg-blue-100/80 dark:group-hover:bg-yellow-400/20
+                                   group-hover:text-blue-700 dark:group-hover:text-yellow-500
+                                   transition-all duration-300'>
+                      <i className='fas fa-file-alt mr-2 text-xs opacity-70'></i>
+                      {category.count} 篇文章
+                    </span>
+                  </div>
                 </div>
+
+                {/* 精致的边框光效 */}
+                <div className='absolute inset-0 rounded-2xl border border-transparent 
+                              group-hover:border-blue-500/20 dark:group-hover:border-yellow-400/20 
+                              transition-colors duration-500'></div>
               </div>
             </Link>
           )
         })}
+      </div>
+
+      {/* 底部装饰 */}
+      <div className='mt-16 text-center'>
+        <div className='w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 dark:from-yellow-400 dark:to-orange-400 rounded-full mx-auto'></div>
       </div>
     </div>
   )
@@ -543,34 +607,144 @@ const LayoutTagIndex = props => {
   const { tagOptions } = props
   const { locale } = useGlobal()
 
+  // 按文章数量排序标签
+  const sortedTags = tagOptions.sort((a, b) => b.count - a.count)
+
   return (
-    <div id='tag-outer-wrapper' className='px-5 mt-8 md:px-0'>
-      <div className='text-4xl font-extrabold dark:text-gray-200 mb-5'>
-        {locale.COMMON.TAGS}
+    <div id='tag-outer-wrapper' className='px-5 mt-8 md:px-0 max-w-7xl mx-auto'>
+      {/* 精致的标题区域 */}
+      <div className='mb-12 text-center'>
+        <div className='flex items-center justify-center gap-4 mb-4'>
+          <div className='w-1 h-12 bg-gradient-to-b from-purple-500 to-pink-500 dark:from-orange-400 dark:to-red-400 rounded-full'></div>
+          <h1 className='text-4xl font-bold text-gray-800 dark:text-gray-200'>
+            {locale.COMMON.TAGS}
+          </h1>
+          <div className='w-1 h-12 bg-gradient-to-b from-pink-500 to-purple-500 dark:from-red-400 dark:to-orange-400 rounded-full'></div>
+        </div>
+        <p className='text-gray-600 dark:text-gray-400 text-lg'>
+          发现感兴趣的标签，探索相关文章
+        </p>
       </div>
+
+      {/* 标签云 - 瀑布流布局 */}
       <div
         id='tag-list'
-        className='duration-200 flex flex-wrap space-x-5 space-y-5 m-10 justify-center'>
-        {tagOptions.map(tag => {
+        className='flex flex-wrap gap-3 justify-center'>
+        {sortedTags.map((tag, index) => {
+          // 根据文章数量动态调整标签大小
+          const getTagSize = (count) => {
+            if (count >= 10) return 'large'
+            if (count >= 5) return 'medium'
+            if (count >= 3) return 'small'
+            return 'tiny'
+          }
+          
+          const tagSize = getTagSize(tag.count)
+          const sizeClasses = {
+            large: 'text-lg px-6 py-3',
+            medium: 'text-base px-5 py-2.5',
+            small: 'text-sm px-4 py-2',
+            tiny: 'text-xs px-3 py-1.5'
+          }
+          
+          // 动态颜色主题
+          const colorThemes = [
+            'from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400',
+            'from-purple-500 to-pink-500 dark:from-purple-400 dark:to-pink-400',
+            'from-green-500 to-emerald-500 dark:from-green-400 dark:to-emerald-400',
+            'from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400',
+            'from-indigo-500 to-purple-500 dark:from-indigo-400 dark:to-purple-400',
+            'from-pink-500 to-rose-500 dark:from-pink-400 dark:to-rose-400',
+            'from-cyan-500 to-blue-500 dark:from-cyan-400 dark:to-blue-400',
+            'from-emerald-500 to-green-500 dark:from-emerald-400 dark:to-green-400'
+          ]
+          
+          const colorTheme = colorThemes[index % colorThemes.length]
+          
           return (
             <Link
               key={tag.name}
               href={`/tag/${tag.name}`}
-              passHref
-              legacyBehavior>
-              <div
-                className={
-                  'group flex flex-nowrap items-center border bg-white text-2xl rounded-xl dark:hover:text-white px-4 cursor-pointer py-3 hover:text-white hover:bg-indigo-600 transition-all hover:scale-110 duration-150'
-                }>
-                <HashTag className={'w-5 h-5 stroke-gray-500 stroke-2'} />
-                {tag.name}
-                <div className='bg-[#f1f3f8] ml-1 px-2 rounded-lg group-hover:text-indigo-600 '>
-                  {tag.count}
+              className='inline-block group'>
+              <div className={`relative overflow-hidden rounded-2xl 
+                            bg-white/70 dark:bg-gray-900/70 
+                            backdrop-blur-sm border border-white/20 dark:border-gray-700/30
+                            shadow-md shadow-gray-200/20 dark:shadow-gray-900/40
+                            hover:shadow-xl hover:shadow-gray-200/30 dark:hover:shadow-gray-900/60
+                            hover:scale-105 hover:-translate-y-1
+                            transition-all duration-300 ease-out
+                            cursor-pointer ${sizeClasses[tagSize]}
+                            font-medium`}>
+                
+                {/* 渐变背景装饰 */}
+                <div className={`absolute inset-0 bg-gradient-to-r ${colorTheme} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl`}></div>
+                
+                {/* 内容区域 */}
+                <div className='relative z-10 flex items-center gap-2'>
+                  {/* 标签图标 */}
+                  <HashTag className={`${tagSize === 'large' ? 'w-5 h-5' : tagSize === 'medium' ? 'w-4 h-4' : 'w-3 h-3'} 
+                                     text-gray-500 dark:text-gray-400 
+                                     group-hover:text-gray-700 dark:group-hover:text-gray-300
+                                     transition-colors duration-300`} />
+                  
+                  {/* 标签名称 */}
+                  <span className='text-gray-700 dark:text-gray-300 
+                                 group-hover:text-gray-900 dark:group-hover:text-white
+                                 transition-colors duration-300 font-medium'>
+                    {tag.name}
+                  </span>
+                  
+                  {/* 文章数量 */}
+                  <span className={`inline-flex items-center justify-center 
+                                  ${tagSize === 'large' ? 'w-6 h-6 text-xs' : tagSize === 'medium' ? 'w-5 h-5 text-xs' : 'w-4 h-4 text-xs'}
+                                  bg-gray-200/80 dark:bg-gray-700/80 text-gray-600 dark:text-gray-400
+                                  group-hover:bg-gray-300/80 dark:group-hover:bg-gray-600/80
+                                  group-hover:text-gray-800 dark:group-hover:text-gray-200
+                                  rounded-full font-bold transition-all duration-300`}>
+                    {tag.count}
+                  </span>
                 </div>
+
+                {/* 精致的边框光效 */}
+                <div className={`absolute inset-0 rounded-2xl border border-transparent 
+                              group-hover:border-gradient group-hover:bg-gradient-to-r group-hover:${colorTheme}
+                              group-hover:border-opacity-20 transition-all duration-300`}></div>
+                
+                {/* 微妙的内阴影效果 */}
+                <div className='absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10 dark:ring-gray-700/20 
+                              group-hover:ring-white/20 dark:group-hover:ring-gray-600/30 
+                              transition-all duration-300'></div>
               </div>
             </Link>
           )
         })}
+      </div>
+
+      {/* 统计信息 */}
+      <div className='mt-16 text-center'>
+        <div className='inline-flex items-center gap-4 px-6 py-3 
+                      bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm 
+                      border border-white/20 dark:border-gray-700/30 
+                      rounded-2xl shadow-lg shadow-gray-200/20 dark:shadow-gray-900/40'>
+          <div className='flex items-center gap-2 text-gray-600 dark:text-gray-400'>
+            <i className='fas fa-tags text-purple-500 dark:text-orange-400'></i>
+            <span className='text-sm font-medium'>
+              共 {tagOptions.length} 个标签
+            </span>
+          </div>
+          <div className='w-px h-4 bg-gray-300 dark:bg-gray-600'></div>
+          <div className='flex items-center gap-2 text-gray-600 dark:text-gray-400'>
+            <i className='fas fa-file-alt text-blue-500 dark:text-cyan-400'></i>
+            <span className='text-sm font-medium'>
+              共 {tagOptions.reduce((total, tag) => total + tag.count, 0)} 篇文章
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* 底部装饰 */}
+      <div className='mt-12 text-center'>
+        <div className='w-20 h-1 bg-gradient-to-r from-purple-500 to-pink-500 dark:from-orange-400 dark:to-red-400 rounded-full mx-auto'></div>
       </div>
     </div>
   )

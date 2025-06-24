@@ -123,16 +123,14 @@ export default function SideRight(props) {
     <div 
       id='sideRight' 
       ref={containerRef}
-      className='hidden xl:block w-80 h-full relative overflow-hidden'
-      style={{ minHeight: '100vh' }}
+      className='w-full h-full relative overflow-hidden'
     >
       {/* 信息卡片区域 - 同步滚动 */}
       <div 
         ref={sideRightRef}
-        className="space-y-2 transition-transform duration-100 ease-out"
+        className="space-y-2 transition-transform duration-100 ease-out h-full"
         style={{ 
           transform: `translateY(${scrollOffset}px)`,
-          minHeight: '100%'
         }}
       >
         {/* 个人信息卡片 */}
@@ -146,7 +144,7 @@ export default function SideRight(props) {
         {/* 最新文章列表 */}
         <div
           className={
-            'border border-gray-200/50 dark:border-gray-700/50 wow fadeInUp hover:border-indigo-600 dark:hover:border-yellow-600 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl text-gray-900 dark:text-white rounded-xl lg:p-6 p-4 hidden lg:block shadow-xl'
+            'border border-gray-200/50 dark:border-gray-700/50 wow fadeInUp hover:border-indigo-600 dark:hover:border-yellow-600 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl text-gray-900 dark:text-white rounded-xl lg:p-6 p-4 hidden lg:block'
           }>
           <LatestPostsGroupMini {...props} />
         </div>
@@ -157,14 +155,14 @@ export default function SideRight(props) {
         <Live2D />
 
         {/* 标签和成绩 */}
-        <Card
+        <div
           className={
-            'bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 text-gray-900 dark:text-white shadow-xl hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 hover:border-indigo-600 dark:hover:border-yellow-600 transition-all duration-300 ease-out cursor-pointer'
+            'border border-gray-200/50 dark:border-gray-700/50 wow fadeInUp hover:border-indigo-600 dark:hover:border-yellow-600 hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl text-gray-900 dark:text-white rounded-xl lg:p-6 p-4'
           }>
           <TagGroups tags={sortedTags} currentTag={currentTag} />
           <hr className='mx-1 flex border-dashed relative my-4' />
           <AnalyticsCard {...props} />
-        </Card>
+        </div>
       </div>
     </div>
   )

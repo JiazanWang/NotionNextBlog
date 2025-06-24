@@ -61,8 +61,7 @@ export default function SideLeft(props) {
     <div 
       id='sideLeft' 
       ref={containerRef}
-      className='hidden xl:block w-72 h-full relative'
-      style={{ minHeight: '100vh' }}
+      className='w-full h-full'
     >
       {/* 目录区 - 动态定位 */}
       <div 

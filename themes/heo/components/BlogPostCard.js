@@ -29,7 +29,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         relative overflow-hidden rounded-xl transition-all duration-500 ease-out cursor-pointer
         bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl
         border border-gray-200/60 dark:border-gray-700/60
-        shadow-lg hover:shadow-xl hover:shadow-indigo-500/10 dark:hover:shadow-yellow-500/10
+        shadow-md hover:shadow-lg hover:shadow-indigo-500/10 dark:hover:shadow-yellow-500/10
         hover:scale-[1.008] hover:-translate-y-1
         hover:border-indigo-400/70 dark:hover:border-yellow-400/70
         flex flex-row h-36 w-full max-w-4xl
@@ -113,7 +113,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
           {showPageCover && (
             <div className="flex-1 flex items-center justify-center relative z-10">
               <Link href={post?.href} passHref legacyBehavior>
-                <div className="relative overflow-hidden rounded-xl h-16 w-full group/img shadow-lg">
+                <div className="relative overflow-hidden rounded-xl h-16 w-full group/img shadow-md">
                   <LazyImage
                     priority={index === 0}
                     src={post?.pageCoverThumbnail}
@@ -127,7 +127,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                   <div className="absolute inset-0 rounded-xl ring-1 ring-white/20 dark:ring-gray-700/30"></div>
                   
                   {/* 阅读更多按钮 - 悬浮在图片上 */}
-                  <div className="absolute bottom-1 right-1 group/btn flex items-center space-x-1 px-1.5 py-0.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded text-xs font-semibold text-indigo-600 dark:text-yellow-500 hover:bg-indigo-500 hover:text-white dark:hover:bg-yellow-500 dark:hover:text-gray-900 transition-all duration-300 opacity-0 group-hover:opacity-100 shadow-lg hover:shadow-xl">
+                                      <div className="absolute bottom-1 right-1 group/btn flex items-center space-x-1 px-1.5 py-0.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded text-xs font-semibold text-indigo-600 dark:text-yellow-500 hover:bg-indigo-500 hover:text-white dark:hover:bg-yellow-500 dark:hover:text-gray-900 transition-all duration-300 opacity-0 group-hover:opacity-100 shadow-md hover:shadow-lg">
                     <span className="text-xs">阅读</span>
                     <svg className="w-2.5 h-2.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

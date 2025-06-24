@@ -6,12 +6,12 @@ const CONFIG = {
 
   HEO_HOME_BANNER_ENABLE: true,
 
-  HEO_SITE_CREATE_TIME: '2024-09-23', // 建站日期，用于计算网站运行的第几天
+  HEO_SITE_CREATE_TIME: '2021-08-23', // 建站日期，用于计算网站运行的第几天
 
   // 首页顶部通知条滚动内容，如不需要可以留空 [] 
   HEO_NOTICE_BAR: [
     { title: '记录我，遇见你！', url: 'https://wangjiazan.com' },
-    { title: '个人微信wangzan101，期待与你有更多的交流。', url: 'https://wangjiazan.com' }
+    { title: '个人微信bolyn000，期待与你有更多的交流。', url: 'https://wangjiazan.com' }
 
 
   ],
@@ -24,7 +24,7 @@ const CONFIG = {
   // 英雄区(首页顶部大卡)
   HEO_HERO_TITLE_1: '分享编程',
   HEO_HERO_TITLE_2: '与思维认知',   
-  HEO_HERO_TITLE_3: 'JIAZANW.COM',
+  HEO_HERO_TITLE_3: '王博霖bolyn',
   HEO_HERO_TITLE_4: '记录我，遇见你！',                                  
   HEO_HERO_TITLE_5: '故事从这里开始。',
 
@@ -47,11 +47,11 @@ const CONFIG = {
   HEO_INFOCARD_GREETINGS: [
     '你好！我是',
     '🔍 分享与热心帮助',
-    '🤝 专修互联网与AI', 
-    '🏃 脚踏实地行动派',   
-    '🏠 智能家居小能手',
-    '🤖️ 数码科技爱好者',
-    '🧱 团队小组发动机'
+    '🤝 专修互联网与编程', 
+    '🏃 AIGC知识传道者',   
+    '🏠 业余马拉松爱好者',
+    '🤖️ 物理学在读博士',
+    '🧱 独立开发者'
   ],
 
   // 个人资料底部按钮
