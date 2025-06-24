@@ -21,9 +21,9 @@ export async function getStaticProps({ params: { category }, locale }) {
   props.posts = props.allPages?.filter(
     page => page.type === 'Post' && page.status === 'Published'
   )
-  // 处理过滤
+  // 处理过滤 - 直接使用category参数，不进行解码
   props.posts = props.posts.filter(
-    post => post && post.category && post.category.includes(category)
+    post => post && post.category && post.category === category
   )
   // 处理文章页数
   props.postCount = props.posts.length
@@ -33,7 +33,7 @@ export async function getStaticProps({ params: { category }, locale }) {
   } else if (siteConfig('POST_LIST_STYLE') === 'page') {
     props.posts = props.posts?.slice(
       0,
-      siteConfig('POSTS_PER_PAGE', 12, props?.NOTION_CONFIG)
+      siteConfig('POSTS_PER_PAGE', 11, props?.NOTION_CONFIG)
     )
   }
 
@@ -58,6 +58,7 @@ export async function getStaticPaths() {
   const { categoryOptions } = await getGlobalData({ from })
   return {
     paths: Object.keys(categoryOptions).map(category => ({
+      // 直接使用原始分类名称，不进行编码
       params: { category: categoryOptions[category]?.name }
     })),
     fallback: true

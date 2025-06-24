@@ -57,6 +57,21 @@ const LayoutBase = props => {
   const { fullWidth, isDarkMode } = useGlobal()
   const router = useRouter()
 
+  // 判断是否应该使用右侧布局（文章列表在右侧）
+  const shouldUseRightLayout = () => {
+    const route = router.route
+    return route === '/' || 
+           route === '/page/[page]' || 
+           route === '/category/[category]' ||
+           route === '/category/[category]/page/[page]' ||
+           route === '/tag/[tag]' ||
+           route === '/tag/[tag]/page/[page]' ||
+           route === '/search/[keyword]' ||
+           route === '/search/[keyword]/page/[page]' ||
+           route === '/[prefix]/[slug]' || 
+           siteConfig('HEO_HERO_BODY_REVERSE', false, CONFIG)
+  }
+
   const headerSlot = (
     <header>
       {/* 顶部导航 */}
@@ -77,7 +92,7 @@ const LayoutBase = props => {
   const slotRight =
     router.route === '/404' || fullWidth ? null : <SideRight {...props} />
 
-  const maxWidth = fullWidth ? 'max-w-[96rem] mx-auto' : 'max-w-[86rem]' // 普通最大宽度是86rem和顶部菜单栏对齐，留空则与窗口对齐
+  const maxWidth = fullWidth ? 'max-w-[96rem] mx-auto' : 'max-w-[75rem]' // 调整最大宽度以适应紧密排列的布局
 
   const HEO_HERO_BODY_REVERSE = siteConfig(
     'HEO_HERO_BODY_REVERSE',
@@ -106,16 +121,16 @@ const LayoutBase = props => {
         className={`flex-grow w-full ${maxWidth} mx-auto relative md:px-5`}>
         <div
           id='container-inner'
-          className={`${HEO_HERO_BODY_REVERSE ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex justify-center relative z-10`}>
-          <div className={`w-full h-auto ${className || ''}`}>
+          className={`${shouldUseRightLayout() ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex justify-center items-start relative z-10 min-h-0`}>
+          <div className={`flex-1 max-w-3xl h-auto ${className || ''}`}>
             {/* 主区上部嵌入 */}
             {slotTop}
             {children}
           </div>
 
-          <div className='lg:px-2'></div>
+          <div className='lg:w-2'></div>
 
-          <div className='hidden xl:block'>
+          <div className='hidden xl:block w-80 flex-shrink-0 h-auto'>
             {/* 主区快右侧 */}
             {slotRight}
           </div>
@@ -139,13 +154,26 @@ const LayoutBase = props => {
 const LayoutIndex = props => {
   return (
     <div id='post-outer-wrapper' className='px-5 md:px-0'>
-      {/* 文章分类条 */}
-      <CategoryBar {...props} />
-      {siteConfig('POST_LIST_STYLE') === 'page' ? (
-        <BlogPostListPage {...props} />
-      ) : (
-        <BlogPostListScroll {...props} />
-      )}
+      {/* 统一容器 - 包含分类条、文章列表和分页 */}
+      <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl
+                      border border-gray-200/50 dark:border-gray-700/50
+                      shadow-2xl rounded-xl
+                      hover:border-indigo-600 dark:hover:border-yellow-600 duration-200
+                      overflow-hidden">
+        {/* 文章分类条 */}
+        <div className="px-6 pt-4 pb-4">
+          <CategoryBar {...props} />
+        </div>
+        
+        {/* 文章列表 */}
+        <div className="px-6 pb-6">
+          {siteConfig('POST_LIST_STYLE') === 'page' ? (
+            <BlogPostListPage {...props} />
+          ) : (
+            <BlogPostListScroll {...props} />
+          )}
+        </div>
+      </div>
     </div>
   )
 }
@@ -157,14 +185,27 @@ const LayoutIndex = props => {
  */
 const LayoutPostList = props => {
   return (
-    <div id='post-outer-wrapper' className='px-5  md:px-0'>
-      {/* 文章分类条 */}
-      <CategoryBar {...props} />
-      {siteConfig('POST_LIST_STYLE') === 'page' ? (
-        <BlogPostListPage {...props} />
-      ) : (
-        <BlogPostListScroll {...props} />
-      )}
+    <div id='post-outer-wrapper' className='px-5 md:px-0'>
+      {/* 统一容器 - 包含分类条、文章列表和分页 */}
+      <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl
+                      border border-gray-200/50 dark:border-gray-700/50
+                      shadow-2xl rounded-xl
+                      hover:border-indigo-600 dark:hover:border-yellow-600 duration-200
+                      overflow-hidden">
+        {/* 文章分类条 */}
+        <div className="px-6 pt-4 pb-4">
+          <CategoryBar {...props} />
+        </div>
+        
+        {/* 文章列表 */}
+        <div className="px-6 pb-6">
+          {siteConfig('POST_LIST_STYLE') === 'page' ? (
+            <BlogPostListPage {...props} />
+          ) : (
+            <BlogPostListScroll {...props} />
+          )}
+        </div>
+      </div>
     </div>
   )
 }
@@ -292,12 +333,12 @@ const LayoutSlug = props => {
   return (
     <>
       <div
-        className={`article h-full w-full ${fullWidth ? '' : 'xl:max-w-5xl'} ${hasCode ? 'xl:w-[73.15vw]' : ''}  bg-white dark:bg-[#18171d] dark:border-gray-600 lg:hover:shadow lg:border rounded-2xl lg:px-2 lg:py-4 `}>
+        className={`article h-full w-full ${fullWidth ? '' : 'xl:max-w-3xl mx-auto'} ${hasCode ? 'xl:w-[55vw] mx-auto' : ''}  bg-white dark:bg-[#18171d] dark:border-gray-600 lg:hover:shadow lg:border rounded-2xl lg:px-2 lg:py-4 `}>
         {/* 文章锁 */}
         {lock && <PostLock validPassword={validPassword} />}
 
         {!lock && post && (
-          <div className='mx-auto md:w-full md:px-5'>
+          <div className='mx-auto md:w-full'>
             {/* 文章主体 */}
             <article
               id='article-wrapper'
@@ -305,7 +346,7 @@ const LayoutSlug = props => {
               itemType='https://schema.org/Movie'>
               {/* Notion文章主体 */}
               <section
-                className='wow fadeInUp p-5 justify-center mx-auto'
+                className='wow fadeInUp p-5 justify-center mx-auto max-w-none'
                 data-wow-delay='.2s'>
                 <AISummary aiSummary={post.aiSummary}/>
                 <WWAds orientation='horizontal' className='w-full' />

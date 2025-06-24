@@ -15,7 +15,7 @@ import PaginationNumber from './PaginationNumber'
  */
 const BlogPostListPage = ({ page = 1, posts = [], postCount, siteInfo }) => {
   const { NOTION_CONFIG } = useGlobal()
-  const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', 12, NOTION_CONFIG)
+  const POSTS_PER_PAGE = siteConfig('POSTS_PER_PAGE', 11, NOTION_CONFIG)
   const totalPage = Math.ceil(postCount / POSTS_PER_PAGE)
   const showPagination = postCount >= POSTS_PER_PAGE
   const POST_TWO_COLS = siteConfig('HEO_HOME_POST_TWO_COLS', true, CONFIG)
@@ -23,10 +23,9 @@ const BlogPostListPage = ({ page = 1, posts = [], postCount, siteInfo }) => {
     return <BlogPostListEmpty />
   } else {
     return (
-      <div id='container' className='w-full'>
+      <>
         {/* 文章列表 */}
-        <div
-          className={`${POST_TWO_COLS && '2xl:grid 2xl:grid-cols-2'} grid-cols-1 gap-5`}>
+        <div className="flex flex-col space-y-2 max-w-3xl mx-auto">
           {posts?.map(post => (
             <BlogPostCard
               index={posts.indexOf(post)}
@@ -38,9 +37,11 @@ const BlogPostListPage = ({ page = 1, posts = [], postCount, siteInfo }) => {
         </div>
 
         {showPagination && (
-          <PaginationNumber page={page} totalPage={totalPage} />
+          <div className="mt-2">
+            <PaginationNumber page={page} totalPage={totalPage} />
+          </div>
         )}
-      </div>
+      </>
     )
   }
 }

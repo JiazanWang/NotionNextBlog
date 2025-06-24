@@ -23,48 +23,52 @@ export function InfoCard(props) {
   const url2 = siteConfig('HEO_INFO_CARD_URL2', null, CONFIG)
   const icon2 = siteConfig('HEO_INFO_CARD_ICON2', null, CONFIG)
   return (
-    <Card className='wow fadeInUp bg-[#4f65f0] dark:bg-yellow-600 text-white flex flex-col w-72 overflow-hidden relative'>
-      {/* 信息卡牌第一行 */}
-      <div className='flex justify-between'>
-        {/* 问候语 */}
-        <GreetingsWords />
-        {/* 头像 */}
-        <div
-          className={`${isSlugPage ? 'absolute right-0 -mt-8 -mr-6 hover:opacity-0 hover:scale-150 blur' : 'cursor-pointer'} justify-center items-center flex dark:text-gray-100 transform transitaion-all duration-200`}>
-          <LazyImage
-            src={siteInfo?.icon}
-            className='rounded-full'
-            width={isSlugPage ? 100 : 28}
-            alt={siteConfig('AUTHOR')}
-          />
+    <Card className='wow fadeInUp bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 text-gray-900 dark:text-white flex flex-col w-80 overflow-hidden relative shadow-xl hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer group'>
+      <div className="info-card" style={{ color: '#111827' }}>
+        {/* 信息卡牌第一行 */}
+        <div className='flex justify-between'>
+          {/* 问候语 */}
+          <GreetingsWords />
+          {/* 头像 */}
+          <div
+            className={`${isSlugPage ? 'absolute right-0 -mt-8 -mr-6 hover:opacity-0 hover:scale-150 blur' : 'cursor-pointer'} justify-center items-center flex transform transition-all duration-300 group-hover:scale-110`}>
+            <LazyImage
+              src={siteInfo?.icon}
+              className='rounded-full ring-2 ring-gray-300/50 dark:ring-white/30 transition-all duration-300 group-hover:ring-4 group-hover:ring-blue-400/30 dark:group-hover:ring-yellow-400/30'
+              width={isSlugPage ? 100 : 28}
+              alt={siteConfig('AUTHOR')}
+            />
+          </div>
         </div>
-      </div>
 
-      <h2 className='text-3xl font-extrabold mt-3'>{siteConfig('AUTHOR')}</h2>
+        <h2 className='text-3xl font-extrabold mt-3 transition-all duration-300 group-hover:text-blue-600 dark:group-hover:text-yellow-500' style={{ color: '#111827' }}>{siteConfig('AUTHOR')}</h2>
 
-      {/* 公告栏 */}
-      <Announcement post={notice} style={{ color: 'white !important' }} />
-
-      <div className='flex justify-between'>
-        <div className='flex space-x-3  hover:text-black dark:hover:text-white'>
-          {/* 两个社交按钮 */}
-          {url1 && (
-            <div className='w-10 text-center bg-indigo-400 p-2 rounded-full  transition-colors duration-200 dark:bg-yellow-500 dark:hover:bg-black hover:bg-white'>
-              <Link href={url1}>
-                <i className={icon1} />
-              </Link>
-            </div>
-          )}
-          {url2 && (
-            <div className='bg-indigo-400 p-2 rounded-full w-10 items-center flex justify-center transition-colors duration-200 dark:bg-yellow-500 dark:hover:bg-black hover:bg-white'>
-              <Link href={url2}>
-                <i className={icon2} />
-              </Link>
-            </div>
-          )}
+        {/* 公告栏 */}
+        <div className="announcement-content transition-all duration-300 group-hover:text-gray-600 dark:group-hover:text-gray-300">
+          <Announcement post={notice} />
         </div>
-        {/* 第三个按钮 */}
-        <MoreButton />
+
+        <div className='flex justify-between'>
+          <div className='flex space-x-3'>
+            {/* 两个社交按钮 */}
+            {url1 && (
+              <div className='w-10 text-center bg-gray-100/80 dark:bg-white/20 backdrop-blur-sm p-2 rounded-full border border-gray-300/50 dark:border-white/30 transition-all duration-300 hover:bg-gray-200/80 dark:hover:bg-white/40 hover:scale-110 hover:-translate-y-0.5 hover:shadow-lg'>
+                <Link href={url1}>
+                  <i className={`${icon1} transition-all duration-300 hover:text-blue-600 dark:hover:text-yellow-500`} style={{ color: '#374151' }} />
+                </Link>
+              </div>
+            )}
+            {url2 && (
+              <div className='bg-gray-100/80 dark:bg-white/20 backdrop-blur-sm p-2 rounded-full w-10 items-center flex justify-center border border-gray-300/50 dark:border-white/30 transition-all duration-300 hover:bg-gray-200/80 dark:hover:bg-white/40 hover:scale-110 hover:-translate-y-0.5 hover:shadow-lg'>
+                <Link href={url2}>
+                  <i className={`${icon2} transition-all duration-300 hover:text-blue-600 dark:hover:text-yellow-500`} style={{ color: '#374151' }} />
+                </Link>
+              </div>
+            )}
+          </div>
+          {/* 第三个按钮 */}
+          <MoreButton />
+        </div>
       </div>
     </Card>
   )
@@ -84,14 +88,16 @@ function MoreButton() {
     <Link href={url3}>
       <div
         className={
-          'group bg-indigo-400 dark:bg-yellow-500 hover:bg-white dark:hover:bg-black hover:text-black dark:hover:text-white flex items-center transition-colors duration-200 py-2 px-3 rounded-full space-x-1'
-        }>
+          'group bg-gray-100/80 dark:bg-white/30 backdrop-blur-sm border border-gray-300/50 dark:border-white/40 hover:bg-gray-200/80 dark:hover:bg-white/50 hover:scale-105 flex items-center transition-all duration-200 py-2 px-3 rounded-full space-x-1'
+        }
+        style={{ color: '#374151' }}>
         <ArrowRightCircle
           className={
-            'group-hover:stroke-black dark:group-hover:stroke-white w-6 h-6 transition-all duration-100'
+            'w-6 h-6 transition-all duration-100'
           }
+          style={{ color: '#374151' }}
         />
-        <div className='font-bold'>{text3}</div>
+        <div className='font-bold' style={{ color: '#374151' }}>{text3}</div>
       </div>
     </Link>
   )
@@ -112,7 +118,8 @@ function GreetingsWords() {
   return (
     <div
       onClick={handleChangeGreeting}
-      className=' select-none cursor-pointer py-1 px-2 bg-indigo-400 hover:bg-indigo-50  hover:text-indigo-950 dark:bg-yellow-500 dark:hover:text-white dark:hover:bg-black text-sm rounded-lg  duration-200 transition-colors'>
+      className='select-none cursor-pointer py-1 px-2 bg-gray-100/70 dark:bg-white/25 backdrop-blur-sm border border-gray-300/50 dark:border-white/30 hover:bg-gray-200/80 dark:hover:bg-white/40 hover:scale-105 text-sm rounded-lg duration-200 transition-all'
+      style={{ color: '#374151' }}>
       {greeting}
     </div>
   )

@@ -12,19 +12,19 @@ export default function TouchMeCard() {
     return <></>
   }
   return (
-    <div className={'relative h-28 text-white flex flex-col'}>
+    <div className={'relative h-28 text-gray-900 dark:text-white flex flex-col'}>
       <FlipCard
-        className='cursor-pointer lg:p-6 p-4 border rounded-xl bg-[#4f65f0] dark:bg-yellow-600 dark:border-gray-600'
+        className='cursor-pointer lg:p-6 p-4 border border-gray-200/50 dark:border-gray-700/50 rounded-xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-2xl'
         frontContent={
           <div className='h-full'>
-            <h2 className='font-[1000] text-3xl'>
+            <h2 className='font-[1000] text-3xl text-gray-900 dark:text-white'>
               {siteConfig('HEO_SOCIAL_CARD_TITLE_1', null, CONFIG)}
             </h2>
-            <h3 className='pt-2'>
+            <h3 className='pt-2 text-gray-700 dark:text-gray-200'>
               {siteConfig('HEO_SOCIAL_CARD_TITLE_2', null, CONFIG)}
             </h3>
             <div
-              className='absolute left-0 top-0 w-full h-full'
+              className='absolute left-0 top-0 w-full h-full opacity-10 dark:opacity-20'
               style={{
                 background:
                   'url(https://bu.dusays.com/2023/05/16/64633c4cd36a9.png) center center no-repeat'
@@ -33,7 +33,7 @@ export default function TouchMeCard() {
         }
         backContent={
           <Link href={siteConfig('HEO_SOCIAL_CARD_URL', null, CONFIG)}>
-            <div className='font-[1000] text-xl h-full'>
+            <div className='font-[1000] text-xl h-full text-gray-900 dark:text-white'>
               {siteConfig('HEO_SOCIAL_CARD_TITLE_3', null, CONFIG)}
             </div>
           </Link>

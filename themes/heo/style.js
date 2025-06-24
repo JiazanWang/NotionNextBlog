@@ -11,9 +11,22 @@ const Style = () => {
         background-color: #f7f9fe;
       }
 
-      // 公告栏中的字体固定白色
+      // 公告栏中的字体适应主题模式
       #theme-heo #announcement-content .notion {
-        color: white;
+        color: #111827 !important;
+      }
+      
+      .dark #theme-heo #announcement-content .notion {
+        color: white !important;
+      }
+      
+      // 强制覆盖InfoCard中的公告内容颜色
+      #theme-heo .announcement-content * {
+        color: #111827 !important;
+      }
+      
+      .dark #theme-heo .announcement-content * {
+        color: white !important;
       }
 
       ::-webkit-scrollbar-thumb {

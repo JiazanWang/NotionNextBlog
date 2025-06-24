@@ -22,7 +22,7 @@ export default function PostHeader({ post, siteInfo, isDarkMode }) {
   return (
     <div
       id='post-bg'
-      className='md:mb-0 -mb-5 w-full h-[30rem] relative md:flex-shrink-0 overflow-hidden bg-cover bg-center bg-no-repeat z-10'>
+      className='md:mb-0 -mb-5 w-full h-[20rem] relative md:flex-shrink-0 overflow-hidden bg-cover bg-center bg-no-repeat z-10'>
       <style jsx>{`
         .coverdiv:after {
           position: absolute;
@@ -37,7 +37,7 @@ export default function PostHeader({ post, siteInfo, isDarkMode }) {
       `}</style>
 
       <div
-        className={`${isDarkMode ? 'bg-[#CA8A04]' : 'bg-[#0060e0]'} absolute top-0 w-full h-full py-10 flex justify-center items-center`}>
+        className={`${isDarkMode ? 'bg-[#CA8A04]' : 'bg-[#0060e0]'} absolute top-0 w-full h-full py-6 flex justify-center items-center`}>
         {/* 文章背景图 */}
         <div
           id='post-cover-wrapper'
@@ -55,7 +55,7 @@ export default function PostHeader({ post, siteInfo, isDarkMode }) {
         {/* 文章文字描述 */}
         <div
           id='post-info'
-          className='absolute top-48 z-10 flex flex-col space-y-4 lg:-mt-12 w-full max-w-[86rem] px-5'>
+          className='absolute top-1/2 transform -translate-y-1/2 z-10 flex flex-col space-y-3 w-full max-w-[86rem] px-5'>
           {/* 分类+标签 */}
           <div className='flex justify-center md:justify-start items-center gap-4'>
             {post.category && (
@@ -93,7 +93,7 @@ export default function PostHeader({ post, siteInfo, isDarkMode }) {
           </div>
 
           {/* 文章Title */}
-          <div className='max-w-5xl font-bold text-3xl lg:text-5xl md:leading-snug shadow-text-md flex  justify-center md:justify-start text-white'>
+          <div className='max-w-5xl font-bold text-2xl lg:text-4xl md:leading-snug shadow-text-md flex justify-center md:justify-start text-white'>
             {siteConfig('POST_TITLE_ICON') && (
               <NotionIcon icon={post.pageIcon} />
             )}
@@ -101,7 +101,7 @@ export default function PostHeader({ post, siteInfo, isDarkMode }) {
           </div>
 
           {/* 标题底部补充信息 */}
-          <section className='flex-wrap dark:text-gray-200 text-opacity-70 shadow-text-md flex text-sm  justify-center md:justify-start mt-4 text-white font-light leading-8'>
+          <section className='flex-wrap dark:text-gray-200 text-opacity-70 shadow-text-md flex text-sm justify-center md:justify-start mt-2 text-white font-light leading-6'>
             <div className='flex justify-center '>
               <div className='mr-2'>
                 <WordCount
