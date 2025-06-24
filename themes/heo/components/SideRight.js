@@ -1,9 +1,8 @@
 import Live2D from '@/components/Live2D'
 import dynamic from 'next/dynamic'
-import { useEffect, useState, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { AnalyticsCard } from './AnalyticsCard'
 import Card from './Card'
-import Catalog from './Catalog'
 import { InfoCard } from './InfoCard'
 import LatestPostsGroupMini from './LatestPostsGroupMini'
 import TagGroups from './TagGroups'
@@ -28,11 +27,10 @@ const FaceBookPage = dynamic(
  * @returns
  */
 export default function SideRight(props) {
-  const { post, tagOptions, currentTag, rightAreaSlot } = props
-  const infoCardRef = useRef(null)
-  const catalogRef = useRef(null)
-  const sideRightParentRef = useRef(null)
-  const [catalogStyle, setCatalogStyle] = useState({})
+  const { tagOptions, currentTag, rightAreaSlot } = props
+  const [scrollOffset, setScrollOffset] = useState(0)
+  const sideRightRef = useRef(null)
+  const containerRef = useRef(null)
 
   // 只摘取标签的前60个，防止右侧过长
   const sortedTags = tagOptions?.slice(0, 60) || []
@@ -43,54 +41,64 @@ export default function SideRight(props) {
     const handleScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          const infoCard = infoCardRef.current
-          const catalog = catalogRef.current
-          const sideRightParent = sideRightParentRef.current
-
-          if (!infoCard || !catalog || !sideRightParent) {
+          const sideRight = sideRightRef.current
+          const container = containerRef.current
+          
+          if (!sideRight || !container) {
             ticking = false
             return
           }
 
-          const infoCardRect = infoCard.getBoundingClientRect()
+          // 获取文章内容区域
+          const articleWrapper = document.getElementById('article-wrapper') || 
+                                document.querySelector('.article') || 
+                                document.querySelector('[id*="article"]')
+          
+          if (!articleWrapper) {
+            ticking = false
+            return
+          }
+
+          // 获取文章滚动信息
+          const articleRect = articleWrapper.getBoundingClientRect()
+          const articleTop = articleWrapper.offsetTop
+          const articleHeight = articleWrapper.scrollHeight
           const windowHeight = window.innerHeight
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-          const documentHeight = document.documentElement.scrollHeight
-          const catalogHeight = catalog.offsetHeight
-
-          // 判断InfoCard是否完全滚出视野
-          const infoCardScrolledOut = infoCardRect.bottom <= 20
-
-          if (infoCardScrolledOut) {
-            // InfoCard已滚出，开始智能定位
-            
-            // 计算剩余滚动距离（到页面底部）
-            const remainingScroll = documentHeight - scrollTop - windowHeight
-            
-            // 如果剩余滚动距离小于目录高度，则开始同步滚动
-            if (remainingScroll <= catalogHeight) {
-              // 同步滚动阶段：目录向上偏移，与页面底部对齐
-              const offset = catalogHeight - remainingScroll
-              setCatalogStyle({
-                position: 'sticky',
-                top: Math.max(20 - offset, 20 - catalogHeight + windowHeight - 40),
-                transition: 'top 0.1s ease-out'
-              })
-            } else {
-              // 固定阶段：目录固定在顶部
-              setCatalogStyle({
-                position: 'sticky',
-                top: 20,
-                transition: 'top 0.3s ease-out'
-              })
-            }
-          } else {
-            // InfoCard还在视野内，目录正常流
-            setCatalogStyle({
-              position: 'static',
-              transition: 'top 0.3s ease-out'
-            })
+          
+          // 计算文章的滚动进度（0 到 1）
+          const articleStart = articleTop - windowHeight * 0.1 // 文章开始显示时
+          const articleEnd = articleTop + articleHeight - windowHeight * 0.9 // 文章结束时
+          const articleScrollRange = articleEnd - articleStart
+          
+          let articleScrollPercent = 0
+          if (articleScrollRange > 0) {
+            articleScrollPercent = Math.min(Math.max((scrollTop - articleStart) / articleScrollRange, 0), 1)
           }
+          
+          // 获取右侧栏信息
+          const sideRightContentHeight = sideRight.scrollHeight
+          const sideRightVisibleHeight = container.clientHeight
+          
+          // 计算右侧栏需要移动的距离，基于文章滚动进度
+          const maxOffset = Math.max(sideRightContentHeight - sideRightVisibleHeight, 0)
+          const targetOffset = maxOffset * articleScrollPercent
+          
+          // 调试信息
+          console.log('Article Scroll Debug:', {
+            articleScrollPercent: (articleScrollPercent * 100).toFixed(1) + '%',
+            scrollTop,
+            articleStart,
+            articleEnd,
+            articleHeight,
+            sideContentHeight: sideRightContentHeight,
+            sideVisibleHeight: sideRightVisibleHeight,
+            maxOffset,
+            targetOffset: targetOffset.toFixed(1)
+          })
+          
+          // 应用同步滚动偏移
+          setScrollOffset(-targetOffset)
 
           ticking = false
         })
@@ -109,32 +117,26 @@ export default function SideRight(props) {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleScroll)
     }
-  }, [post])
+  }, [])
 
   return (
     <div 
       id='sideRight' 
-      ref={sideRightParentRef}
-      className='hidden xl:block w-80 h-full relative'
+      ref={containerRef}
+      className='hidden xl:block w-80 h-full relative overflow-hidden'
       style={{ minHeight: '100vh' }}
     >
-      {/* InfoCard - 正常滚动 */}
-      <div ref={infoCardRef} className="space-y-2">
-        <InfoCard {...props} className='w-80 wow fadeInUp' />
-      </div>
-
-      {/* 目录区 - 智能定位 */}
+      {/* 信息卡片区域 - 同步滚动 */}
       <div 
-        ref={catalogRef}
-        style={catalogStyle}
-        className="space-y-2 mt-2"
+        ref={sideRightRef}
+        className="space-y-2 transition-transform duration-100 ease-out"
+        style={{ 
+          transform: `translateY(${scrollOffset}px)`,
+          minHeight: '100%'
+        }}
       >
-        {/* 文章页显示目录 */}
-        {post && post.toc && post.toc.length > 0 && (
-          <Card className='bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 text-gray-900 dark:text-white shadow-2xl wow fadeInUp'>
-            <Catalog toc={post.toc} />
-          </Card>
-        )}
+        {/* 个人信息卡片 */}
+        <InfoCard {...props} className='w-80 wow fadeInUp' />
 
         {/* 联系交流群 */}
         <div className='wow fadeInUp'>
@@ -144,7 +146,7 @@ export default function SideRight(props) {
         {/* 最新文章列表 */}
         <div
           className={
-            'border border-gray-200/50 dark:border-gray-700/50 wow fadeInUp hover:border-indigo-600 dark:hover:border-yellow-600 duration-200 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl text-gray-900 dark:text-white rounded-xl lg:p-6 p-4 hidden lg:block shadow-2xl'
+            'border border-gray-200/50 dark:border-gray-700/50 wow fadeInUp hover:border-indigo-600 dark:hover:border-yellow-600 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl text-gray-900 dark:text-white rounded-xl lg:p-6 p-4 hidden lg:block shadow-xl'
           }>
           <LatestPostsGroupMini {...props} />
         </div>
@@ -157,7 +159,7 @@ export default function SideRight(props) {
         {/* 标签和成绩 */}
         <Card
           className={
-            'bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 text-gray-900 dark:text-white shadow-2xl hover:border-indigo-600 dark:hover:border-yellow-600 duration-200'
+            'bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 text-gray-900 dark:text-white shadow-xl hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 hover:border-indigo-600 dark:hover:border-yellow-600 transition-all duration-300 ease-out cursor-pointer'
           }>
           <TagGroups tags={sortedTags} currentTag={currentTag} />
           <hr className='mx-1 flex border-dashed relative my-4' />

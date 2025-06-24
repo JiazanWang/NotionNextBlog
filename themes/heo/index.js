@@ -40,6 +40,7 @@ import { PostLock } from './components/PostLock'
 import PostRecommend from './components/PostRecommend'
 import SearchNav from './components/SearchNav'
 import SideRight from './components/SideRight'
+import SideLeft from './components/SideLeft'
 import CONFIG from './config'
 import { Style } from './style'
 import AISummary from '@/components/AISummary'
@@ -88,11 +89,22 @@ const LayoutBase = props => {
     </header>
   )
 
+  // 检测是否为文章详情页
+  const isArticlePage = router.route === '/[prefix]/[slug]'
+  
+  // 左侧栏 仅文章详情页显示目录
+  const slotLeft = isArticlePage && !fullWidth ? <SideLeft {...props} /> : null
+  
   // 右侧栏 用户信息+标签列表
   const slotRight =
     router.route === '/404' || fullWidth ? null : <SideRight {...props} />
 
-  const maxWidth = fullWidth ? 'max-w-[96rem] mx-auto' : 'max-w-[75rem]' // 调整最大宽度以适应紧密排列的布局
+  // 根据是否为文章详情页调整最大宽度
+  const maxWidth = fullWidth 
+    ? 'max-w-[96rem] mx-auto' 
+    : isArticlePage 
+      ? 'max-w-[90rem]' // 文章详情页三列布局需要更大宽度
+      : 'max-w-[75rem]' // 其他页面保持原有宽度
 
   const HEO_HERO_BODY_REVERSE = siteConfig(
     'HEO_HERO_BODY_REVERSE',
@@ -119,22 +131,47 @@ const LayoutBase = props => {
       <main
         id='wrapper-outer'
         className={`flex-grow w-full ${maxWidth} mx-auto relative md:px-5`}>
-        <div
-          id='container-inner'
-          className={`${shouldUseRightLayout() ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex justify-center items-start relative z-10 min-h-0`}>
-          <div className={`flex-1 max-w-3xl h-auto ${className || ''}`}>
-            {/* 主区上部嵌入 */}
-            {slotTop}
-            {children}
-          </div>
+        {isArticlePage && !fullWidth ? (
+          // 文章详情页三列布局
+          <div
+            id='container-inner'
+            className='w-full mx-auto xl:flex justify-center items-start relative z-10 min-h-0 gap-2'>
+            {/* 左侧目录栏 */}
+            <div className='hidden xl:block w-72 flex-shrink-0 h-auto'>
+              {slotLeft}
+            </div>
 
-          <div className='lg:w-2'></div>
+            {/* 中间内容区域 */}
+            <div className={`flex-1 max-w-4xl h-auto ${className || ''}`}>
+              {/* 主区上部嵌入 */}
+              {slotTop}
+              {children}
+            </div>
 
-          <div className='hidden xl:block w-80 flex-shrink-0 h-auto'>
-            {/* 主区快右侧 */}
-            {slotRight}
+            {/* 右侧信息栏 */}
+            <div className='hidden xl:block w-80 flex-shrink-0 h-auto'>
+              {slotRight}
+            </div>
           </div>
-        </div>
+        ) : (
+          // 其他页面保持原有两列布局
+          <div
+            id='container-inner'
+            className={`${shouldUseRightLayout() ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex justify-center items-start relative z-10 min-h-0`}>
+            <div className={`flex-1 max-w-3xl h-auto ${className || ''}`}>
+              {/* 主区上部嵌入 */}
+              {slotTop}
+              {children}
+            </div>
+
+            <div className='lg:w-2'></div>
+
+            <div className='hidden xl:block w-80 flex-shrink-0 h-auto'>
+              {/* 主区快右侧 */}
+              {slotRight}
+            </div>
+          </div>
+        )}
       </main>
 
       {/* 页脚 */}
