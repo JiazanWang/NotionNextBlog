@@ -28,7 +28,7 @@ const CONFIG = {
   HEO_HERO_TITLE_4: '记录我，遇见你！',                                  
   HEO_HERO_TITLE_5: '故事从这里开始。',
 
-  HEO_HERO_TITLE_LINK: 'https://blog.wangjiazan.com/', // 点击英雄区标题跳转链接 
+  HEO_HERO_TITLE_LINK: 'https://wbolyn.com/', // 点击英雄区标题跳转链接 
   
   // 英雄区遮罩文字
   HEO_HERO_COVER_TITLE: '随便逛逛',   
@@ -57,7 +57,7 @@ const CONFIG = {
   // 个人资料底部按钮
   HEO_INFO_CARD_URL1: '/about',
   HEO_INFO_CARD_ICON1: 'fas fa-user',
-  HEO_INFO_CARD_URL2: 'https://jiazanw.com/',
+  HEO_INFO_CARD_URL2: 'https://wbolyn.com/',
   HEO_INFO_CARD_ICON2: 'fab fa-github',
   HEO_INFO_CARD_URL3: 'https://github.com/JiazanWang',
   HEO_INFO_CARD_TEXT3: '了解更多',
@@ -126,7 +126,7 @@ const CONFIG = {
   HEO_SOCIAL_CARD_TITLE_1: '交流频道',  
   HEO_SOCIAL_CARD_TITLE_2: '加入我们的社群讨论分享',
   HEO_SOCIAL_CARD_TITLE_3: '点击加入社群',
-  HEO_SOCIAL_CARD_URL: 'https://blog.wangjiazan.com.com/',
+  HEO_SOCIAL_CARD_URL: 'https://wbolyn.com/',
 
   // 底部统计面板文案
   HEO_POST_COUNT_TITLE: '文章数:',
