@@ -62,26 +62,26 @@ const CONFIG = {
   HEO_GROUP_ICONS: [
     {
       title_1: 'ChatGPT',
-      img_1: '/images/heo/icon-chatgpt.webp',
+      img_1: '/images/heo/202401a8f9e6b4d5c7a8e3f2b1c9d0e8f7g5h4.webp',
       color_1: '#f8f9fa',
       title_2: 'Claude',
-      img_2: '/images/heo/Claude.webp',
+      img_2: '/images/heo/202402b9f0e7c5d6a8f4e2b3c0d1e9f8g6h5.webp',
       color_2: '#ffffff'
     },
     {
       title_1: 'Grok',
-      img_1: '/images/heo/Grok.webp',
+      img_1: '/images/heo/202403c0f1e8d6a7f5e3b4c2d0e1f9g7h6.webp',
       color_1: '#f1f3f4',
       title_2: '即梦AI',
-      img_2: '/images/heo/即梦图标.webp',
+      img_2: '/images/heo/202404d1f2e9a8f6e4b5c3d1e0f8g8h7.webp',
       color_2: '#f8f9ff'
     },
     {
       title_1: 'Midjourney',
-      img_1: '/images/heo/Midjourney.webp',
+      img_1: '/images/heo/202405e2f3a9f7e5b6c4d2e1f0g9h8.webp',
       color_1: '#f5f5f5',
       title_2: 'Notion',
-      img_2: '/images/heo/notion.webp',
+      img_2: '/images/heo/202406f4a0f8e6b7c5d3e2f1g0h9.webp',
       color_2: '#fafafa'
     },
     {
@@ -89,63 +89,63 @@ const CONFIG = {
       img_1: '/images/heo/20235c0731cd4c0c95fc136a8db961fdf963071502.webp',
       color_1: '#f6f8f6',
       title_2: 'SwiftUI',
-      img_2: '/images/heo/swiftui-10011.webp',
+      img_2: '/images/heo/202407f5a1e9b8c6d4e3f2g1h0.webp',
       color_2: '#f0f4ff'
     },
     {
       title_1: 'C#',
-      img_1: '/images/heo/C-jinjin.webp',
+      img_1: '/images/heo/202408f6a2b9c7d5e4f3g2h1.webp',
       color_1: '#f0f8f0',
       title_2: 'C++',
-      img_2: '/images/heo/C++.webp',
+      img_2: '/images/heo/202409f7a3c0d6e5f4g3h2.webp',
       color_2: '#f8f9fa'
     },
     {
       title_1: 'JavaScript',
-      img_1: '/images/heo/JavaScript代码.webp',
+      img_1: '/images/heo/202410f8a4c1d7e6f5g4h3.webp',
       color_1: '#fdfdfd',
       title_2: 'HTML5',
-      img_2: '/images/heo/html5.webp',
+      img_2: '/images/heo/202411f9a5c2d8e7f6g5h4.webp',
       color_2: '#f1f3f4'
     },
     {
       title_1: 'CSS3',
-      img_1: '/images/heo/css3.webp',
+      img_1: '/images/heo/202412f0a6c3d9e8f7g6h5.webp',
       color_1: '#f8f9ff',
       title_2: 'VSCode',
-      img_2: '/images/heo/vscode.webp',
+      img_2: '/images/heo/202413f1a7c4e0f8g7h6.webp',
       color_2: '#f5f5f5'
     },
     {
       title_1: 'Git',
-      img_1: '/images/heo/git-1.webp',
+      img_1: '/images/heo/202414f2a8c5e1f9g8h7.webp',
       color_1: '#e8eaed',
       title_2: 'GitHub',
-      img_2: '/images/heo/github.webp',
+      img_2: '/images/heo/202415f3a9c6e2g0h8.webp',
       color_2: '#ffffff'
     },
     {
       title_1: 'macOS',
-      img_1: '/images/heo/macos.webp',
+      img_1: '/images/heo/202416f4a0c7e3g1h9.webp',
       color_1: '#f1f3f4',
       title_2: 'Windows',
-      img_2: '/images/heo/windows.webp',
+      img_2: '/images/heo/202417f5a1c8e4g2h0.webp',
       color_2: '#f6f8f6'
     },
     {
       title_1: 'Obsidian',
-      img_1: '/images/heo/obsidian.webp',
+      img_1: '/images/heo/202418f6a2c9e5g3h1.webp',
       color_1: '#f8f9fa',
       title_2: 'Zotero',
-      img_2: '/images/heo/zotero.webp',
+      img_2: '/images/heo/202419f7a3e6g4h2.webp',
       color_2: '#f0f4ff'
     },
     {
       title_1: 'Flomo',
-      img_1: '/images/heo/flomo.webp',
+      img_1: '/images/heo/202420f8a4e7g5h3.webp',
       color_1: '#fdfdfd',
       title_2: 'COROS',
-      img_2: '/images/heo/COROS-Logo白-copy.webp',
+      img_2: '/images/heo/202421f9a5e8g6h4.webp',
       color_2: '#f1f3f4'
     }
   ],
