@@ -10,14 +10,14 @@ const CONFIG = {
 
   // 首页顶部通知条滚动内容，如不需要可以留空 []
   HEO_NOTICE_BAR: [
-    { title: '记录我，遇见你！', url: 'https://wbolyn.com' },
+    { title: 'AIGC，互联网营销，新兴科技分享！', url: 'https://wbolyn.com' },
     { title: '个人微信bolyn000，期待与你有更多的交流。', url: 'https://wangjiazan.com' }
   ],
 
   // 英雄区左右侧组件颠倒位置
   HEO_HERO_REVERSE: false,
   // 博客主体区左右侧组件颠倒位置
-  HEO_HERO_BODY_REVERSE: false,
+  HEO_HERO_BODY_REVERSE: true,
 
   // 英雄区(首页顶部大卡)
   HEO_HERO_TITLE_1: '分享编程',
@@ -61,60 +61,92 @@ const CONFIG = {
   // 用户技能图标
   HEO_GROUP_ICONS: [
     {
-      title_1: 'AfterEffect',
-      img_1: '/images/heo/20239df3f66615b532ce571eac6d14ff21cf072602.webp',
-      color_1: '#989bf8',
-      title_2: 'Sketch',
-      img_2: '/images/heo/2023e0ded7b724a39f12d59c3dc8fbdc7cbe074202.webp',
+      title_1: 'ChatGPT',
+      img_1: '/images/heo/icon-chatgpt.webp',
+      color_1: '#f8f9fa',
+      title_2: 'Claude',
+      img_2: '/images/heo/Claude.webp',
       color_2: '#ffffff'
     },
     {
-      title_1: 'Docker',
-      img_1: '/images/heo/20231108a540b2862d26f8850172e4ea58ed075102.webp',
-      color_1: '#57b6e6',
-      title_2: 'Photoshop',
-      img_2: '/images/heo/2023e4058a91608ea41751c4f102b131f267075902.webp',
-      color_2: '#4082c3'
+      title_1: 'Grok',
+      img_1: '/images/heo/Grok.webp',
+      color_1: '#f1f3f4',
+      title_2: '即梦AI',
+      img_2: '/images/heo/即梦图标.webp',
+      color_2: '#f8f9ff'
     },
     {
-      title_1: 'FinalCutPro',
-      img_1: '/images/heo/20233e777652412247dd57fd9b48cf997c01070702.webp',
-      color_1: '#ffffff',
-      title_2: 'Python',
-      img_2: '/images/heo/20235c0731cd4c0c95fc136a8db961fdf963071502.webp',
-      color_2: '#ffffff'
+      title_1: 'Midjourney',
+      img_1: '/images/heo/Midjourney.webp',
+      color_1: '#f5f5f5',
+      title_2: 'Notion',
+      img_2: '/images/heo/notion.webp',
+      color_2: '#fafafa'
     },
     {
-      title_1: 'Swift',
-      img_1: '/images/heo/202328bbee0b314297917b327df4a704db5c072402.webp',
-      color_1: '#eb6840',
-      title_2: 'Principle',
-      img_2: '/images/heo/2023f76570d2770c8e84801f7e107cd911b5073202.webp',
-      color_2: '#8f55ba'
+      title_1: 'Python',
+      img_1: '/images/heo/20235c0731cd4c0c95fc136a8db961fdf963071502.webp',
+      color_1: '#f6f8f6',
+      title_2: 'SwiftUI',
+      img_2: '/images/heo/swiftui-10011.webp',
+      color_2: '#f0f4ff'
     },
     {
-      title_1: 'illustrator',
-      img_1: '/images/heo/20237359d71b45ab77829cee5972e36f8c30073902.webp',
-      color_1: '#f29e39',
-      title_2: 'CSS3',
-      img_2: '/images/heo/20237c548846044a20dad68a13c0f0e1502f074602.webp',
-      color_2: '#2c51db'
+      title_1: 'C#',
+      img_1: '/images/heo/C-jinjin.webp',
+      color_1: '#f0f8f0',
+      title_2: 'C++',
+      img_2: '/images/heo/C++.webp',
+      color_2: '#f8f9fa'
     },
     {
-      title_1: 'JS',
-      img_1: '/images/heo/2023786e7fc488f453d5fb2be760c96185c0075502.webp',
-      color_1: '#f7cb4f',
-      title_2: 'HTML',
-      img_2: '/images/heo/202372b4d760fd8a497d442140c295655426070302.webp',
-      color_2: '#e9572b'
+      title_1: 'JavaScript',
+      img_1: '/images/heo/JavaScript代码.webp',
+      color_1: '#fdfdfd',
+      title_2: 'HTML5',
+      img_2: '/images/heo/html5.webp',
+      color_2: '#f1f3f4'
+    },
+    {
+      title_1: 'CSS3',
+      img_1: '/images/heo/css3.webp',
+      color_1: '#f8f9ff',
+      title_2: 'VSCode',
+      img_2: '/images/heo/vscode.webp',
+      color_2: '#f5f5f5'
     },
     {
       title_1: 'Git',
-      img_1: '/images/heo/2023ffa5707c4e25b6beb3e6a3d286ede4c6071102.webp',
-      color_1: '#df5b40',
-      title_2: 'Rhino',
-      img_2: '/images/heo/20231ca53fa0b09a3ff1df89acd7515e9516173302.webp',
-      color_2: '#1f1f1f'
+      img_1: '/images/heo/git-1.webp',
+      color_1: '#e8eaed',
+      title_2: 'GitHub',
+      img_2: '/images/heo/github.webp',
+      color_2: '#ffffff'
+    },
+    {
+      title_1: 'macOS',
+      img_1: '/images/heo/macos.webp',
+      color_1: '#f1f3f4',
+      title_2: 'Windows',
+      img_2: '/images/heo/windows.webp',
+      color_2: '#f6f8f6'
+    },
+    {
+      title_1: 'Obsidian',
+      img_1: '/images/heo/obsidian.webp',
+      color_1: '#f8f9fa',
+      title_2: 'Zotero',
+      img_2: '/images/heo/zotero.webp',
+      color_2: '#f0f4ff'
+    },
+    {
+      title_1: 'Flomo',
+      img_1: '/images/heo/flomo.webp',
+      color_1: '#fdfdfd',
+      title_2: 'COROS',
+      img_2: '/images/heo/COROS-Logo白-copy.webp',
+      color_2: '#f1f3f4'
     }
   ],
 
