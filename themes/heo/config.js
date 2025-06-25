@@ -10,7 +10,7 @@ const CONFIG = {
 
   // 首页顶部通知条滚动内容，如不需要可以留空 [] 
   HEO_NOTICE_BAR: [
-    { title: '记录我，遇见你！', url: 'https://wangjiazan.com' },
+    { title: '记录我，遇见你！', url: 'https://wbolyn.com' },
     { title: '个人微信bolyn000，期待与你有更多的交流。', url: 'https://wangjiazan.com' }
 
 
