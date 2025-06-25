@@ -20,38 +20,29 @@ export default function PostAdjacent({ prev, next }) {
   }, [router])
 
   useEffect(() => {
-    // 文章到底部时显示下一篇文章推荐
-    const articleEnd = document.getElementById('article-end')
-    const footerBottom = document.getElementById('footer-bottom')
-
-    const handleIntersect = entries => {
-      entries.forEach(entry => {
-        if (entry.target === articleEnd) {
-          if (entry.isIntersecting) {
-            setIsShow(true)
-          }
-        } else if (entry.target === footerBottom) {
-          if (entry.isIntersecting) {
-            setIsShow(false)
-          }
-        }
-      })
+    // 文章滑动到底部时显示下一篇文章推荐
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+      
+      // 计算滚动百分比，只有当滚动到80%以上时才显示卡片
+      const scrollPercentage = (scrollTop + windowHeight) / documentHeight
+      
+      if (scrollPercentage > 0.8) {
+        setIsShow(true)
+      } else {
+        setIsShow(false)
+      }
     }
 
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    }
-
-    const observer = new IntersectionObserver(handleIntersect, options)
-    if (articleEnd) observer.observe(articleEnd)
-    if (footerBottom) observer.observe(footerBottom)
+    window.addEventListener('scroll', handleScroll)
+    
+    // 初始检查
+    handleScroll()
 
     return () => {
-      if (articleEnd) observer.unobserve(articleEnd)
-      if (footerBottom) observer.unobserve(footerBottom)
-      observer.disconnect()
+      window.removeEventListener('scroll', handleScroll)
     }
   }, [])
 

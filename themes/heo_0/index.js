@@ -106,14 +106,14 @@ const LayoutBase = props => {
         className={`flex-grow w-full ${maxWidth} mx-auto relative md:px-5`}>
         <div
           id='container-inner'
-          className={`${HEO_HERO_BODY_REVERSE ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex justify-center relative z-10`}>
-          <div className={`w-full h-auto ${className || ''}`}>
+          className={`${HEO_HERO_BODY_REVERSE ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex relative z-10`}>
+          <div className={`w-full h-auto ${className || ''}`} style={{marginLeft: '0.25rem', marginRight: '4rem'}}>
             {/* 主区上部嵌入 */}
             {slotTop}
             {children}
           </div>
 
-          <div className='lg:px-2'></div>
+          <div className='lg:px-1'></div>
 
           <div className='hidden xl:block'>
             {/* 主区快右侧 */}
@@ -241,6 +241,11 @@ const LayoutArchive = props => {
   )
 }
 
+/**
+ * 文章详情
+ * @param {*} props
+ * @returns
+ */
 /**
  * 文章详情
  * @param {*} props
