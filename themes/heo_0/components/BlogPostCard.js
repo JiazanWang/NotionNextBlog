@@ -36,24 +36,6 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
           (POST_TWO_COLS ? '2xl:h-80 2xl:flex-col' : '') +
           ' wow fadeInUp border bg-white dark:bg-[#1e1e1e] flex mb-4 flex-col h-[15rem] md:h-44 md:flex-row  group w-full dark:border-gray-600 hover:border-indigo-600  dark:hover:border-yellow-600 duration-300 transition-colors justify-between overflow-hidden rounded-xl'
         }>
-        {/* 图片封面 */}
-        {showPageCover && (
-          <Link href={post?.href} passHref legacyBehavior>
-            <div
-              className={
-                (POST_TWO_COLS ? ' 2xl:w-full' : '') +
-                ' w-full md:w-5/12 overflow-hidden cursor-pointer select-none'
-              }>
-              <LazyImage
-                priority={index === 0}
-                src={post?.pageCoverThumbnail}
-                alt={post?.title}
-                className='h-full w-full object-cover group-hover:scale-105 group-hover:brightness-75 transition-all duration-500 ease-in-out' //宽高都调整为自适应,保证封面居中
-              />
-            </div>
-          </Link>
-        )}
-
         {/* 文字区块 */}
         <div
           className={
@@ -107,6 +89,24 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
             </div>
           </div>
         </div>
+
+        {/* 图片封面 */}
+        {showPageCover && (
+          <Link href={post?.href} passHref legacyBehavior>
+            <div
+              className={
+                (POST_TWO_COLS ? ' 2xl:w-full' : '') +
+                ' w-full md:w-5/12 overflow-hidden cursor-pointer select-none'
+              }>
+              <LazyImage
+                priority={index === 0}
+                src={post?.pageCoverThumbnail}
+                alt={post?.title}
+                className='h-full w-full object-cover group-hover:scale-105 group-hover:brightness-75 transition-all duration-500 ease-in-out' //宽高都调整为自适应,保证封面居中
+              />
+            </div>
+          </Link>
+        )}
       </div>
     </article>
   )
