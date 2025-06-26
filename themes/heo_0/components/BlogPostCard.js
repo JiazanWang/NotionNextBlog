@@ -40,7 +40,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         <div
           className={
             (POST_TWO_COLS ? '2xl:p-4 2xl:h-40 2xl:w-full' : '') +
-            ' flex p-6  flex-col justify-between h-32 md:h-full w-full md:w-7/12'
+            ' flex p-6  flex-col justify-between h-32 md:h-full w-full md:w-7/12 order-2 md:order-1'
           }>
           <header>
             {/* 分类 */}
@@ -96,7 +96,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
             <div
               className={
                 (POST_TWO_COLS ? ' 2xl:w-full' : '') +
-                ' w-full md:w-5/12 overflow-hidden cursor-pointer select-none'
+                ' w-full md:w-5/12 overflow-hidden cursor-pointer select-none order-1 md:order-2'
               }>
               <LazyImage
                 priority={index === 0}
