@@ -107,7 +107,7 @@ const LayoutBase = props => {
         <div
           id='container-inner'
           className={`${HEO_HERO_BODY_REVERSE ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex relative z-10`}>
-          <div className={`w-full h-auto ${className || ''}`} style={{marginLeft: '0.25rem', marginRight: '4rem'}}>
+          <div className={`w-full h-auto ${className || ''}`} style={{marginLeft: '0.25rem', marginRight: '1rem'}}>
             {/* 主区上部嵌入 */}
             {slotTop}
             {children}
@@ -224,18 +224,20 @@ const LayoutArchive = props => {
   // 归档页顶部显示条，如果是默认归档则不显示。分类详情页显示分类列表，标签详情页显示当前标签
 
   return (
-    <div className='p-5 rounded-xl border dark:border-gray-600 max-w-6xl w-full bg-white dark:bg-[#1e1e1e]'>
+    <div id='post-outer-wrapper' className='px-5 md:px-0'>
       {/* 文章分类条 */}
-      <CategoryBar {...props} border={false} />
+      <CategoryBar {...props} />
 
-      <div className='px-3'>
-        {Object.keys(archivePosts).map(archiveTitle => (
-          <BlogPostArchive
-            key={archiveTitle}
-            posts={archivePosts[archiveTitle]}
-            archiveTitle={archiveTitle}
-          />
-        ))}
+      <div className='p-5 rounded-xl border dark:border-gray-600 w-full bg-white dark:bg-[#1e1e1e]'>
+        <div className='px-3'>
+          {Object.keys(archivePosts).map(archiveTitle => (
+            <BlogPostArchive
+              key={archiveTitle}
+              posts={archivePosts[archiveTitle]}
+              archiveTitle={archiveTitle}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
