@@ -221,8 +221,14 @@ function TopGroup(props) {
   const { latestPosts, allNavPages, siteInfo } = props
   const { locale } = useGlobal()
   const todayCardRef = useRef()
+  
+  // 检查是否启用Today Card
+  const todayCardEnabled = siteConfig('HEO_HERO_TODAY_CARD_ENABLE', true, CONFIG)
+  
   function handleMouseLeave() {
-    todayCardRef.current.coverUp()
+    if (todayCardEnabled && todayCardRef.current) {
+      todayCardRef.current.coverUp()
+    }
   }
 
   // 获取置顶推荐文章
@@ -231,7 +237,7 @@ function TopGroup(props) {
   return (
     <div
       id='hero-right-wrapper'
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={todayCardEnabled ? handleMouseLeave : undefined}
       className='flex-1 relative w-full'>
       {/* 置顶推荐文章 */}
       <div
@@ -259,8 +265,8 @@ function TopGroup(props) {
           )
         })}
       </div>
-      {/* 一个大的跳转文章卡片 */}
-      <TodayCard cRef={todayCardRef} siteInfo={siteInfo} />
+      {/* 一个大的跳转文章卡片 - 根据配置决定是否显示 */}
+      {todayCardEnabled && <TodayCard cRef={todayCardRef} siteInfo={siteInfo} />}
     </div>
   )
 }
