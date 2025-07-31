@@ -77,7 +77,7 @@ const LayoutBase = props => {
   const slotRight =
     router.route === '/404' || fullWidth ? null : <SideRight {...props} />
 
-  const maxWidth = fullWidth ? 'max-w-[96rem] mx-auto' : 'max-w-[86rem]' // 普通最大宽度是86rem和顶部菜单栏对齐，留空则与窗口对齐
+  const maxWidth = fullWidth ? 'max-w-[96rem] mx-auto' : 'max-w-[75rem]' // 普通最大宽度调整为75rem，与heo主题保持一致
 
   const HEO_HERO_BODY_REVERSE = siteConfig(
     'HEO_HERO_BODY_REVERSE',
@@ -106,18 +106,20 @@ const LayoutBase = props => {
         className={`flex-grow w-full ${maxWidth} mx-auto relative md:px-5`}>
         <div
           id='container-inner'
-          className={`${HEO_HERO_BODY_REVERSE ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex relative z-10`}>
-          <div className={`w-full h-auto ${className || ''}`} style={{marginLeft: '0.25rem', marginRight: '1rem'}}>
+          className={`${HEO_HERO_BODY_REVERSE ? 'flex-row-reverse' : ''} w-full mx-auto lg:flex justify-center items-start relative z-10 min-h-screen`}>
+          <div className={`flex-1 max-w-5xl min-h-screen ${className || ''}`}>
             {/* 主区上部嵌入 */}
             {slotTop}
             {children}
           </div>
 
-          <div className='lg:px-1'></div>
+          <div className='lg:w-2'></div>
 
-          <div className='hidden xl:block'>
-            {/* 主区快右侧 */}
-            {slotRight}
+          <div className='hidden xl:block w-80 flex-shrink-0 self-stretch'>
+            <div className='sticky top-0 min-h-screen'>
+              {/* 主区快右侧 */}
+              {slotRight}
+            </div>
           </div>
         </div>
       </main>
